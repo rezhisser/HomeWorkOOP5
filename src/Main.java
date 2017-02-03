@@ -8,7 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		
+		/*
 		File from = new File("from");
 		File to = new File("to");
 		from.mkdirs();
@@ -32,10 +32,11 @@ public class Main {
 		for (File file : fileList) {
 		System.out.println(file);
 		}
+		*/
 
 		FileManagement fm = new FileManagement();
-		fm.copyFileFromCatalog(fileList, "from", "to");
-		fm.copyFileFromCatalog(fileList, "e:/4", "e:/5");
+		fm.copyFileFromCatalog("from", "to", "doc", "txt");
+		fm.copyFileFromCatalog("e:/4", "e:/5", "doc", "jpg");
 
 	}
 	

@@ -14,26 +14,23 @@ public class FileManagement {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected void copyFile (File in, File out){
-	try(
-	FileInputStream fis = new FileInputStream(in);
-	FileOutputStream fos = new FileOutputStream(out)) {
-	byte[] buffer = new byte[1024];
-	int byteread = 0;
-	for (; (byteread = fis.read(buffer)) > 0;) {
-	fos.write(buffer, 0, byteread);
-	}
-	} catch (IOException e) {
-		System.out.println(e);
-		}
-	}
 	
-	protected void copyFileFromCatalog (File [] filelist, String catalogFrom, String catalogTo){
+	protected void copyFileFromCatalog (String catalogFrom, String catalogTo, String... ext){
 		
-		for (int i = 0; i < filelist.length; i++) {
+		//создаем объект from каталога, с которого будем коприровать
+		File from = new File(catalogFrom);
+		
+		// создаем объект ExtFilter, содержащий список расширений, которые будут копироваться
+		ExtFilter extF = new ExtFilter(ext);
+		
+		// получаем список файлов из каталога from
+		File[] fileList = from.listFiles(extF);
+		
+		for (int i = 0; i < fileList.length; i++) {
+			// копируем все файлы из filelist
 			try(
-					FileInputStream fis = new FileInputStream( catalogFrom + "/" +filelist[i].getName());
-					FileOutputStream fos = new FileOutputStream(catalogTo + "/" + filelist[i].getName())) {
+					FileInputStream fis = new FileInputStream( catalogFrom + "/" +fileList[i].getName());
+					FileOutputStream fos = new FileOutputStream(catalogTo + "/" + fileList[i].getName())) {
 					byte[] buffer = new byte[1024];
 					int byteread = 0;
 					for (; (byteread = fis.read(buffer)) > 0;) {
